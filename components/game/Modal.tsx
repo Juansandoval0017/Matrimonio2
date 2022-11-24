@@ -1,5 +1,5 @@
 'use client'
-import Router from "next/router"
+import { useRouter } from 'next/navigation';
 import Spinner from "./Spinner"
 
 interface Props {
@@ -39,6 +39,9 @@ export const Modal = ({Reset,gameOver,name,data,score,fetching}: Props) => {
     return null;
   }
 
+  const router = useRouter();
+
+  console.log(name)
 
   return(
     
@@ -47,9 +50,9 @@ export const Modal = ({Reset,gameOver,name,data,score,fetching}: Props) => {
         
         <div className="bg-white w-3/4 h-3/4 md:w-2/4 md_:h-2/4 rounded-md shadow-lg p-10 drop-shadow-md flex items-center justify-between flex-col">
             
-            <h2 className={StylesData[name].title} >Apoyaste a {name} con {score} asi va la cosa 🤗</h2>
+            <h2 className={StylesData[name]?.title || ''} >Apoyaste a {name} con {score} asi va la cosa 🤗</h2>
 
-            <Spinner />
+            { fetching && <Spinner />}
 
             { ! fetching && <article className="flex w-full flex-col" >
 
@@ -75,7 +78,7 @@ export const Modal = ({Reset,gameOver,name,data,score,fetching}: Props) => {
             <section  className="w-full flex justify-around items-center gap-2" >
 
             <button className= "w-1/2 md:w-1/4 bg-pink-400 h-8 border-2 border-pink-400 text-white rounded-md hover:bg-inherit hover:text-pink-400 transition-all ease-in-out duration-200" onClick={async ()=>{ await Reset()  }} >Jugar Otra vez</button>
-            <a className="w-1/2" href="/"><button  className= " w-full md:w-1/4 bg-blue-600 h-8 border-2 border-blue-600 text-white rounded-md hover:bg-inherit hover:text-blue-400 transition-all ease-in-out duration-200">Ir al inicio</button></a>
+            <button  onClick={()=> router.push('/')} className= "w-1/2 md:w-1/4 bg-blue-600 h-8 border-2 border-blue-600 text-white rounded-md hover:bg-inherit hover:text-blue-400 transition-all ease-in-out duration-200">Ir al inicio</button>
 
             </section>
             

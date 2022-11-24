@@ -22,7 +22,7 @@ export default function prueba({ params }: {params: {name:string}})   {
     snake: [ {x: 5, y: 5}, {x: 6, y: 5} , {x: 7, y: 5} , {x: 8, y: 5}],
     food: {x: 7, y: 7},
     speed: 170,
-    gameOver: true ,
+    gameOver: false ,
     score: 0,
     highScore: 0,
   })

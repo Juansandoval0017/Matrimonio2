@@ -1,21 +1,30 @@
 
 interface Person {
-    [key: string]: {
+    
         color: string;
         emoji: string;
-
-    }
+    
 }
 
-export const Person_Data : Person = {
-    "David" : {
-        color: "w-full min-h-screen flex items-center flex-col bg-blue-200 absolute",
-        emoji: "👨🏻‍💻",
-    } ,
-    "Milena":{
-        color: "w-full min-h-screen flex items-center flex-col bg-red-200 absolute",
-        emoji:"👩‍⚕️"
+
+const getColor = (name: string) => {
+    if (name === "David") {
+        return "w-full min-h-screen flex items-center flex-col bg-blue-200 absolute"
     }
+    else if(name === "Milena"){
+        return "w-full min-h-screen flex items-center flex-col bg-red-200 absolute"
+    }
+    return ""
+}
+
+const getEmoji = (name: string) => {
+    if (name === "David") {
+        return "👨🏻‍💻"
+    }
+    else if(name === "Milena"){
+        return "👩‍⚕️"
+    }
+    return ""
 }
 
 
@@ -24,10 +33,18 @@ export default function GameLayout({ children, params }: {
     children: React.ReactNode,
     params: { name: string }
 
-  }) 
+  })
   
-  {
-    const { color , emoji } = Person_Data[params.name] || {}
+  
+  
+  { 
+
+    const color = getColor(params.name!)
+
+    const emoji = getEmoji(params.name!)
+
+
+    
     return (
       
         <div className={color}>
