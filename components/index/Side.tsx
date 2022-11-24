@@ -30,7 +30,7 @@ export const Side = ({section,name,alias,description,img,href,button,imgClass} :
                 <p className=" font-thin text-justify text-white" >{description}</p>
                   
                 
-                <button onClick={ ()=> router.push(`/${name.split(' ')[0]}`) } className={button}>Team {name.split(" ",1)}</button>
+                <button onClick={ ()=> router.push(`/game/${name.split(' ')[0]}`) } className={button}>Team {name.split(" ",1)}</button>
                 
             </article>
             
