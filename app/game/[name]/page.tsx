@@ -2,7 +2,7 @@
 'use client'
 import { time } from 'console'
 import React,{useEffect,useState} from 'react'
-import { Modal } from '../../components/game/Modal'
+import { Modal } from '../../../components/game/Modal'
 import axios from 'axios'
 
 

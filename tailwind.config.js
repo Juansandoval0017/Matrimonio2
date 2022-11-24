@@ -14,6 +14,7 @@ module.exports = {
       },
       backgroundImage:{
         'board': 'url("/board.jpg")',
+        'capilla': 'url("/capilla.jpg")'
       }
       
     },
