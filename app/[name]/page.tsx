@@ -3,6 +3,7 @@
 import { time } from 'console'
 import React,{useEffect,useState} from 'react'
 import { Modal } from '../../components/game/Modal'
+import axios from 'axios'
 
 
 export default function prueba({ params }: {params: {name:string}})   {
@@ -10,17 +11,25 @@ export default function prueba({ params }: {params: {name:string}})   {
   const numCols = 15
   const numRows = 15
 
+  const [data, setData] = useState({
+    David: 0,
+    Milena: 0,
+    total: 0,
+  })
+
   const  [game, setGame] = useState({
     direction: '',
     snake: [ {x: 5, y: 5}, {x: 6, y: 5} , {x: 7, y: 5} , {x: 8, y: 5}],
     food: {x: 7, y: 7},
     speed: 170,
-    gameOver: false,
+    gameOver: true ,
     score: 0,
     highScore: 0,
   })
 
   const [time, setTime] = useState(0)
+
+  const [fetching, setFetching] = useState(false)
 
   const board = Array(numRows).fill(Array(numCols).fill(0))
 
@@ -32,6 +41,19 @@ export default function prueba({ params }: {params: {name:string}})   {
         setTime( (time) => time + 1)
       }, game.speed)
       return () => clearInterval(interval)
+
+    }
+
+    else{
+      setFetching(true)
+      axios.post('/api/data', {
+        name: params.name,
+        puntaje: game.score,
+      }).then((res) => {
+        setData(res.data)
+        setFetching(false)
+      })
+      .catch((err) => alert(err))
 
     }
 
@@ -140,6 +162,8 @@ const restart = () => {
 
 
 
+
+
   
   return (
     
@@ -187,7 +211,7 @@ const restart = () => {
 
       </section>
 
-      <Modal  Reset={restart} score={game.score} gameOver={game.gameOver} name = {params.name}  />
+      <Modal fetching={fetching} Reset={restart} score={game.score} data={data} gameOver={game.gameOver} name = {params.name}  />
       
     </div>
 

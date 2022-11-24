@@ -27,7 +27,7 @@ export default function GameLayout({ children, params }: {
   }) 
   
   {
-    const { color , emoji } = Person_Data[params.name]
+    const { color , emoji } = Person_Data[params.name] || {}
     return (
       
         <div className={color}>
